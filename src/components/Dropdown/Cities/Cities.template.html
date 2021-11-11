@@ -1,0 +1,11 @@
+<div class="cities">
+  <div
+    class="cities__city"
+    v-for="(city) of cities"
+    v-on:click="selectCity(city)"
+    v-bind:class="{cities__city__selected: getIsCitySelected(city)}"
+  >
+    {{city.city_name}}
+  </div>
+</div>
+<div class="cities-total">Total selected cities: {{selectedCities.length}}</div>

@@ -1,0 +1,50 @@
+<div>
+  <div class="dropdown-container">
+    <div
+      v-on:click="changeDropdownState"
+      v-bind:class="{ dropdown__head__disabled: loading, dropdown__head__open: dropdownOpen }"
+      class="dropdown__head"
+    >
+      {{getDropdownHeaderLabel()}}
+      <div
+        v-if="!loading && selectedState"
+        v-on:click="clear"
+        class="dropdown__head__clear"
+      >
+        &times;
+      </div>
+      <div v-if="loading" class="dropdown__head__loader">
+        <Spinner />
+      </div>
+    </div>
+    <div
+      v-if="dropdownOpen"
+      v-bind:class="{ dropdown__body__disabled: loading }"
+      class="dropdown__body"
+    >
+      <div class="dropdown__body__scroll">
+        <div
+          class="dropdown__body__item"
+          v-if="states.length === 0"
+          v-for="(country) of countries"
+          v-bind:class="{ dropdown__body__item__selected: getIsCountrySelected(country) }"
+          v-on:click="selectCountry(country)"
+          :key="country.id"
+        >
+          {{country.country_name}}
+        </div>
+  
+        <div
+          class="dropdown__body__item"
+          v-for="(state) of states"
+          v-bind:class="{ dropdown__body__item__selected: getIsCountrySelected(state) }"
+          v-on:click="selectState(state)"
+          :key="state.id"
+        >
+          {{state.state_name}}
+        </div>
+      </div>
+    </div>
+  </div>  
+  <Cities v-if="cities.length > 0" :cities="cities"></Cities>
+</div>

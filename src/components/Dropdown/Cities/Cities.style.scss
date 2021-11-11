@@ -1,0 +1,30 @@
+.cities {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  margin: 50px auto 0 auto;
+  flex-wrap: wrap;
+  .cities__city {
+    border-radius: 3px;
+    padding: 10px 20px;
+    background-color: #cbcbcb;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin: 5px;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:active {
+      opacity: 0.6;
+    }
+    &.cities__city__selected {
+      background-color: #ff9800;
+      color: white;
+    }
+  }
+}
+
+.cities-total {
+  margin-top: 50px;
+}

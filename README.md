@@ -21,7 +21,7 @@ yarn lint
 ```
 
 ### Demo
-https://vue-dropdown.herokuapp.com/
+https://vue-dropdown.web.app/
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

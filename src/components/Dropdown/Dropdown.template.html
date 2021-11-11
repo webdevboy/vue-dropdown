@@ -45,6 +45,9 @@
         </div>
       </div>
     </div>
-  </div>  
+  </div>
+  <div v-if="cities.length === 0 && states.length > 0 && !loading" class="cities-placeholder">
+    No cities
+  </div>
   <Cities v-if="cities.length > 0" :cities="cities"></Cities>
 </div>

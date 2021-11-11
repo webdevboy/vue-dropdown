@@ -11,14 +11,20 @@
       </div>
     </div>
     <div v-if="dropdownOpen" class="dropdown__body">
-      <div
-        class="dropdown__body__item"
-        v-for="(country) of countries"
-        v-bind:class="{ dropdown__body__item__selected: getIsCountrySelected(country) }"
-        v-on:click="selectCountry(country)"
-        :key="country.id"
-      >
-        {{country.country_name}}
+      <div class="dropdown__body__buttons">
+        <button v-on:click="selectAll">Select All</button>
+        <button v-on:click="deselectAll">Deselect All</button>
+      </div>
+      <div class="dropdown__body__scroll">
+        <div
+          class="dropdown__body__item"
+          v-for="(country) of countries"
+          v-bind:class="{ dropdown__body__item__selected: getIsCountrySelected(country) }"
+          v-on:click="selectCountry(country)"
+          :key="country.id"
+        >
+          {{country.country_name}}
+        </div>
       </div>
     </div>
   </div>
@@ -72,6 +78,14 @@ export default class HelloWorld extends Vue {
     else {
       this.selectedCountries = [...this.selectedCountries, country];
     }
+  }
+
+  selectAll(): void {
+    this.selectedCountries = this.countries;
+  }
+
+  deselectAll(): void {
+    this.selectedCountries = [];
   }
 
   async fetchCountries(): Promise<void> {
@@ -152,11 +166,10 @@ export default class HelloWorld extends Vue {
       pointer-events: none;
     }
     .dropdown__body {
-      height: 250px;
+      height: 300px;
       width: calc(100% - 2px);
-      overflow-y: auto;
       position: absolute;
-      bottom: -250px;
+      bottom: -300px;
       border: 1px solid rgba(0, 0, 0, 0.4);
       border-top: none;
       background-color: white;
@@ -164,19 +177,39 @@ export default class HelloWorld extends Vue {
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       box-shadow: 0 3px 5px 0 #cbcbcb;
-      .dropdown__body__item {
-        text-align: left;
-        padding: 10px 20px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        &:hover {
-          background-color: #e9e9e9;
+      .dropdown__body__buttons {
+        height: 50px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        box-shadow: 0 3px 5px 0 #cbcbcb;
+        button {
+          font-size: 16px;
+          border: none;
+          background-color: #a0b2ff;
+          padding: 8px 20px;
+          border-radius: 3px;
+          cursor: pointer;
         }
       }
-      .dropdown__body__item__selected {
-        background-color: #cbcbcb;
-        &:hover {
+      .dropdown__body__scroll {
+        height: 250px;
+        overflow-y: auto;
+        width: 100%;
+        .dropdown__body__item {
+          text-align: left;
+          padding: 10px 20px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          &:hover {
+            background-color: #e9e9e9;
+          }
+        }
+        .dropdown__body__item__selected {
           background-color: #cbcbcb;
+          &:hover {
+            background-color: #cbcbcb;
+          }
         }
       }
     }
